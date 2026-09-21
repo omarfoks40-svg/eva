@@ -16,3 +16,5 @@ services:
         sync: false
       - key: AI_MODEL
         value: gpt-4o-mini
+      - key: AI_MAX_TOKENS
+        value: "5000"
