@@ -114,9 +114,22 @@ fca({ appState }, (err, api) => {
         return;
       }
 
-      // أوامر بدون بادئة
-      let noPrefixCmd = [...commands.values()].find(c => c.config.usePrefix === false && (msgLower === c.config.name || c.config.aliases?.includes(msgLower)));
-      if (noPrefixCmd) return noPrefixCmd.run({ api, event, args: msgLower.split(/\s+/), config: globalConfig });
+      // كل الأوامر تقبل اسمها أو بديلها بدون بادئة، مع تمرير بقية النص كوسائط
+      const noPrefixEntry = [...commands.values()].map(command => {
+        const names = [command.config.name, ...(command.config.aliases || [])].map(name => String(name).toLowerCase());
+        const matchedName = names.find(name => msgLower === name || msgLower.startsWith(name + ' '));
+        return matchedName ? { command, matchedName } : null;
+      }).find(Boolean);
+
+      if (noPrefixEntry) {
+        const { command, matchedName } = noPrefixEntry;
+        const rest = msgLower.slice(matchedName.length).trim();
+        const args = rest ? rest.split(/\s+/) : [];
+        if (command.config.adminOnly && !globalConfig.adminUIDs.map(String).includes(String(senderID))) {
+          return api.sendMessage('❌ هذا الأمر خاص بالمطور ماهر.', threadID, messageID);
+        }
+        return command.run({ api, event, args, config: globalConfig });
+      }
 
       // أوامر بالبادئة
       if (body.startsWith(prefix)) {
