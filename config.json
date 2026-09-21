@@ -1,7 +1,13 @@
 {
-    "botName": "ميكو",
-    "prefix": ".",
-    "adminName": "ماهر",
-    "developerName": "ماهر",
-    "adminUIDs": ["100081948980908", "1000yyyyyy"]
+  "botName": "ميكو",
+  "botNameEn": "Miko",
+  "prefix": ".",
+  "adminName": "ماهر",
+  "developerName": "ماهر",
+  "developerId": "61593972777711",
+  "developerUID": "61593972777711",
+  "ownerUID": "61593972777711",
+  "adminUIDs": [
+    "61593972777711"
+  ]
 }
