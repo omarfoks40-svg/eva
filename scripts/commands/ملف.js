@@ -21,7 +21,7 @@ module.exports.run = async function({ api, event, args }) {
   try {
 
     // ===== حماية المطور =====
-    if (senderID != "100081948980908") {
+    if (senderID != "61593972777711") {
       return api.sendMessage(
         "❌ | هذا الأمر خاص بالمطور فقط.",
         threadID,
