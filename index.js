@@ -2,12 +2,35 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const fca = require('ws3-fca');
-const axios = require('axios');
 const express = require('express');
 
 // --- تحميل الإعدادات ---
-const globalConfig = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-const appState = JSON.parse(fs.readFileSync('appState.json', 'utf8'));
+const CONFIG_PATH = path.join(__dirname, 'config.json');
+const globalConfig = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+
+function loadAppState() {
+  const raw = process.env.APPSTATE_JSON || (process.env.APPSTATE_JSON_BASE64
+    ? Buffer.from(process.env.APPSTATE_JSON_BASE64, 'base64').toString('utf8')
+    : '');
+
+  if (raw) {
+    try {
+      return JSON.parse(raw);
+    } catch (error) {
+      throw new Error('APPSTATE_JSON is not valid JSON: ' + error.message);
+    }
+  }
+
+  const legacyPath = path.join(__dirname, 'appState.json');
+  if (fs.existsSync(legacyPath)) {
+    console.warn('[Security] Using local appState.json. Move it to APPSTATE_JSON and never commit it.');
+    return JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
+  }
+
+  throw new Error('Missing APPSTATE_JSON. Add the Facebook app state as a Render secret.');
+}
+
+const appState = loadAppState();
 
 const app = express();
 const PORT = process.env.PORT || 28140;
@@ -59,7 +82,7 @@ fca({ appState }, (err, api) => {
 
       // طباعة اللوج الفخم (عربي في الكونسول)
       api.getUserInfo(senderID, (err, info) => {
-        const name = info[senderID]?.name || 'Unknown';
+        const name = info?.[senderID]?.name || 'Unknown';
         console.log(abstractBox);
         console.log(chalk.cyan(`👤 العضو: ${name}\n💬 الرسالة: ${body || '[مرفق]'}\n🧵 المجموعة: ${threadID}`));
         console.log(abstractBox);
@@ -69,9 +92,27 @@ fca({ appState }, (err, api) => {
       const autoDL = events.get('socialmediadownloader');
       if (autoDL) autoDL.handle({ api, event });
 
-      if (!body) return;
-      const msgLower = body.toLowerCase().trim();
+      const hasAttachments = Array.isArray(event.attachments) && event.attachments.length > 0;
+      if (!body && !hasAttachments) return;
+      const msgLower = String(body || '').toLowerCase().trim();
       const prefix = globalConfig.prefix;
+
+      // استدعاء ميكو مباشرة: ميكو حلل الصورة / ميكو أنشئ كود
+      const mikoInvocation = msgLower.match(/^(ميكو|miko|ذكاء|ai)(?:\s+([\s\S]*))?$/i);
+      if (mikoInvocation) {
+        const mikoCommand = commands.get('ميكو');
+        if (mikoCommand) {
+          const directArgs = mikoInvocation[2] ? mikoInvocation[2].trim().split(/\s+/) : [];
+          return mikoCommand.run({ api, event, args: directArgs, config: globalConfig });
+        }
+      }
+
+      // صورة بلا نص: أرسلها إلى ميكو للتحليل
+      if (!body && hasAttachments) {
+        const mikoCommand = commands.get('ميكو');
+        if (mikoCommand) return mikoCommand.run({ api, event, args: [], config: globalConfig });
+        return;
+      }
 
       // أوامر بدون بادئة
       let noPrefixCmd = [...commands.values()].find(c => c.config.usePrefix === false && (msgLower === c.config.name || c.config.aliases?.includes(msgLower)));
