@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messenger-NexaloSIM-Bot Status</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-terminal: #0f1629;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --accent-success: #10b981;
+      --accent-warning: #f59e0b;
+      --accent-error: #ef4444;
+      --border-radius: 12px;
+      --glow-color: rgba(59, 130, 246, 0.5);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      position: relative;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 3px;
+    }
+    
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+    }
+    
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+      margin-right: 10px;
+      border-radius: 2px;
+    }
+    
+    .card {
+      background-color: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(225deg, var(--accent-primary), transparent 70%);
+      opacity: 0.1;
+      border-radius: 0 var(--border-radius) 0 100%;
+    }
+    
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .status-label {
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+    }
+    
+    .status-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-primary);
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    #status {
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      display: inline-block;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    #status.text-green-400 {
+      color: var(--accent-success);
+      background-color: rgba(16, 185, 129, 0.1);
+    }
+    
+    #status.text-red-400 {
+      color: var(--accent-error);
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+    
+    #status.text-yellow-400 {
+      color: var(--accent-warning);
+      background-color: rgba(245, 158, 11, 0.1);
+    }
+    
+    #status.pulse::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 20px;
+      animation: pulse 2s infinite;
+      z-index: -1;
+    }
+    
+    #status.text-green-400.pulse::after {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    
+    #status.text-red-400.pulse::after {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    
+    #status.text-yellow-400.pulse::after {
+      box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+    }
+    
+    #uptime {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    
+    #logs {
+      max-height: 400px;
+      overflow-y: auto;
+      background-color: var(--bg-terminal);
+      color: var(--text-secondary);
+      padding: 1.25rem;
+      border-radius: calc(var(--border-radius) - 4px);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+    
+    #logs::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(to bottom, var(--bg-terminal), transparent);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.8;
+      border-radius: calc(var(--border-radius) - 4px) calc(var(--border-radius) - 4px) 0 0;
+    }
+    
+    #logs::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(to top, var(--bg-terminal), transparent);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.8;
+      border-radius: 0 0 calc(var(--border-radius) - 4px) calc(var(--border-radius) - 4px);
+    }
+    
+    .log-entry {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      animation: fadeIn 0.3s ease-out forwards;
+      opacity: 0;
+      position: relative;
+      padding-left: 18px;
+    }
+    
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+    
+    .log-entry::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      opacity: 0.7;
+    }
+    
+    .log-entry.log {
+      color: var(--text-secondary);
+    }
+    
+    .log-entry.error {
+      color: var(--accent-error);
+    }
+    
+    .log-entry.error::before {
+      content: '✕';
+      color: var(--accent-error);
+    }
+    
+    .log-entry.warn {
+      color: var(--accent-warning);
+    }
+    
+    .log-entry.warn::before {
+      content: '!';
+      color: var(--accent-warning);
+    }
+    
+    /* Custom scrollbar */
+    #logs::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #logs::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    
+    #logs::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+    
+    #logs::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 20px;
+    }
+    
+    .loading div {
+      position: absolute;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    
+    .loading div:nth-child(1) {
+      left: 8px;
+      animation: loading1 0.6s infinite;
+    }
+    
+    .loading div:nth-child(2) {
+      left: 8px;
+      animation: loading2 0.6s infinite;
+    }
+    
+    .loading div:nth-child(3) {
+      left: 32px;
+      animation: loading2 0.6s infinite;
+    }
+    
+    .loading div:nth-child(4) {
+      left: 56px;
+      animation: loading3 0.6s infinite;
+    }
+    
+    /* Animations */
+    @keyframes loading1 {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes loading2 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(24px, 0); }
+    }
+    
+    @keyframes loading3 {
+      0% { transform: scale(1); }
+      100% { transform: scale(0); }
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px var(--glow-color); }
+      50% { box-shadow: 0 0 20px var(--glow-color); }
+      100% { box-shadow: 0 0 5px var(--glow-color); }
+    }
+    
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+      
+      .card {
+        padding: 1.25rem;
+      }
+      
+      .status-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  
+  <div class="container">
+    <h1>Messenger-NexaloSIM-Bot Status</h1>
+
+    <div class="card">
+      <h2>Bot Status</h2>
+      <div class="status-grid">
+        <span class="status-label">Status:</span>
+        <span id="status" class="text-yellow-400 pulse">Loading...</span>
+        
+        <span class="status-label">Uptime:</span>
+        <span id="uptime">
+          <div class="loading">
+            <div></div><div></div><div></div><div></div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Console Logs</h2>
+      <div id="logs">
+        <div class="log-entry log">Initializing system...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#3b82f6"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          }
+        },
+        "opacity": {
+          "value": 0.3,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#3b82f6",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 0.5
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+
+    // WebSocket connection
+    const ws = new WebSocket(`ws://${window.location.host}`);
+
+    ws.onopen = () => {
+      console.log('Connected to WebSocket server');
+      addLogEntry('Connected to WebSocket server', 'log');
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === 'status') {
+        const { status, uptime } = data.data;
+        
+        // Update status with animation
+        const statusElement = document.getElementById('status');
+        statusElement.textContent = status;
+        statusElement.className = status === 'running' ? 'text-green-400 pulse' : 'text-red-400 pulse';
+
+        // Format uptime with animation
+        const hours = Math.floor(uptime / 3600);
+        const minutes = Math.floor((uptime % 3600) / 60);
+        const seconds = uptime % 60;
+        
+        const uptimeElement = document.getElementById('uptime');
+        uptimeElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+        
+        // Add a subtle animation when uptime updates
+        uptimeElement.style.animation = 'none';
+        uptimeElement.offsetHeight; // Trigger reflow
+        uptimeElement.style.animation = 'fadeIn 0.5s ease-out';
+      }
+
+      if (data.type === 'logs') {
+        const logsDiv = document.getElementById('logs');
+        data.data.forEach((log, index) => {
+          setTimeout(() => {
+            addLogEntry(log.message, log.type);
+          }, index * 100); // Stagger the log entries for a nice effect
+        });
+      }
+
+      if (data.type === 'log') {
+        addLogEntry(data.data.message, data.data.type);
+      }
+    };
+
+    ws.onclose = () => {
+      console.log('Disconnected from WebSocket server');
+      document.getElementById('status').textContent = 'Disconnected';
+      document.getElementById('status').className = 'text-red-400 pulse';
+      addLogEntry('Disconnected from WebSocket server', 'error');
+    };
+    
+    // Helper function to add log entries with animation
+    function addLogEntry(message, type) {
+      const logsDiv = document.getElementById('logs');
+      const logEntry = document.createElement('div');
+      logEntry.className = `log-entry ${type}`;
+      logEntry.textContent = message;
+      logEntry.style.animationDelay = '0.1s';
+      logsDiv.appendChild(logEntry);
+      logsDiv.scrollTop = logsDiv.scrollHeight;
+    }
+    
+    // Remove loading animation after a delay
+    setTimeout(() => {
+      if (document.getElementById('uptime').innerHTML.includes('loading')) {
+        document.getElementById('uptime').textContent = 'Waiting for data...';
+      }
+    }, 5000);
+  </script>
+</body>
+</html>

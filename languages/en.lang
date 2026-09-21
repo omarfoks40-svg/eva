@@ -1,0 +1,24 @@
+# English Language File for the Bot
+
+# Update-related messages
+updater.updateAvailable=🌟══════✨ UPDATE AVAILABLE ✨══════🌟\n📢 New version of the bot is available!\n💬 Use %1update to install the latest version.\n🕒 Time: %2\n📅 Date: %3\n══════✨══════✨══════✨══════
+updater.checking=🔄 Checking for updates...
+updater.codeUpdated=📦 Code updated. Installing dependencies...
+updater.depsInstalled=✅ Dependencies installed. Restarting server...
+updater.restartSuccess=🚀 Server restarted successfully!
+updater.error=⚠️ Failed to update: %1
+updater.noUpdates=No updates available.
+
+# Notification command messages (from previous command)
+noti.noMessage=Please provide a message to send. Usage: %1noti <message>
+noti.noGroups=No group threads found to send the notification.
+noti.success=✅ Notification sent to %1 groups!
+noti.error=⚠️ Failed to send notification: %1
+noti.format=🌟══════✨ NOTIFICATION ✨══════🌟\n📢 Message from Admin: %1\n💬 %2\n🕒 Time: %3\n📅 Date: %4\n══════✨══════✨══════✨══════
+
+# General messages
+general.adminOnly=🚫 This command is for admins only.
+
+unsend.missingReply=⚠️ Please reply to a bot message to unsend it!
+unsend.notBotMessage=⚠️ You can only unsend bot messages!
+unsend.error=❌ Failed to unsend the message: %1
