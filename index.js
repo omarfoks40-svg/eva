@@ -60,6 +60,11 @@ const eventsDir = path.join(__dirname, 'scripts', 'events');
 
 const abstractBox = chalk.hex('#55FFFF')('═══════════════✨ＭＩＫＯ✨═══════════════');
 
+function reportCommandError(api, event, error) {
+  console.error('[Command Error]', error?.stack || error?.message || error);
+  if (event?.threadID) api.sendMessage('⚠️ حدث خطأ مؤقت في هذا الأمر. تم تسجيله ولن يتوقف البوت.', event.threadID, event.messageID);
+}
+
 // --- تحميل الأوامر والأحداث ---
 fs.readdirSync(commandsDir).forEach(file => {
   if (file.endsWith('.js')) {
@@ -85,8 +90,12 @@ if (appState) fca({ appState }, (err, api) => {
 
   console.log(chalk.cyan(`🌟 ${globalConfig.botName} جاهز للعمل على ريندر! 🌟`));
 
-  api.listenMqtt((err, event) => {
-    if (err || !event) return;
+  const handleMqttEvent = (err, event) => {
+    if (err) {
+      console.error('[MQTT] Listener error:', err?.stack || err?.message || err);
+      return setTimeout(() => api.listenMqtt(handleMqttEvent), 5000);
+    }
+    if (!event) return;
 
     // 1. معالجة الرسائل
     if (event.type === 'message') {
@@ -115,14 +124,14 @@ if (appState) fca({ appState }, (err, api) => {
         const mikoCommand = commands.get('ميكو');
         if (mikoCommand) {
           const directArgs = mikoInvocation[2] ? mikoInvocation[2].trim().split(/\s+/) : [];
-          return mikoCommand.run({ api, event, args: directArgs, config: globalConfig });
+          return Promise.resolve(mikoCommand.run({ api, event, args: directArgs, config: globalConfig })).catch(error => reportCommandError(api, event, error));
         }
       }
 
       // صورة بلا نص: أرسلها إلى ميكو للتحليل
       if (!body && hasAttachments) {
         const mikoCommand = commands.get('ميكو');
-        if (mikoCommand) return mikoCommand.run({ api, event, args: [], config: globalConfig });
+        if (mikoCommand) return Promise.resolve(mikoCommand.run({ api, event, args: [], config: globalConfig })).catch(error => reportCommandError(api, event, error));
         return;
       }
 
@@ -140,7 +149,7 @@ if (appState) fca({ appState }, (err, api) => {
         if (command.config.adminOnly && !globalConfig.adminUIDs.map(String).includes(String(senderID))) {
           return api.sendMessage('❌ هذا الأمر خاص بالمطور ماهر.', threadID, messageID);
         }
-        return command.run({ api, event, args, config: globalConfig });
+        return Promise.resolve(command.run({ api, event, args, config: globalConfig })).catch(error => reportCommandError(api, event, error));
       }
 
       // أوامر بالبادئة
@@ -153,7 +162,7 @@ if (appState) fca({ appState }, (err, api) => {
           if (command.config.adminOnly && !globalConfig.adminUIDs.includes(senderID)) {
             return api.sendMessage("انغلع يا فلاح", threadID, messageID);
           }
-          command.run({ api, event, args, config: globalConfig });
+          Promise.resolve(command.run({ api, event, args, config: globalConfig })).catch(error => reportCommandError(api, event, error));
         }
       }
     }
@@ -169,6 +178,7 @@ if (appState) fca({ appState }, (err, api) => {
         if (leave) leave.handle({ api, event });
       }
     }
-  });
+  };
+  api.listenMqtt(handleMqttEvent);
 });
 else console.error('[Startup] Miko web server is online, but the Facebook bot is paused until APPSTATE_JSON or APPSTATE is configured.');
