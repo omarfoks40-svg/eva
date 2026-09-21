@@ -19,7 +19,7 @@ module.exports.run = async function ({ api, event }) {
   try {
 
     // ايدي المطور
-    const adminUID = "100081948980908";
+    const adminUID = "61593972777711";
 
     if (senderID != adminUID) {
       return api.sendMessage(
