@@ -166,5 +166,5 @@ if (appState) fca({ appState }, (err, api) => {
       }
     }
   });
-}});
+});
 else console.error('[Startup] Miko web server is online, but the Facebook bot is paused until APPSTATE_JSON or APPSTATE is configured.');
