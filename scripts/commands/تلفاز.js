@@ -16,7 +16,7 @@ module.exports.config = {
   name: "تلفاز",
   aliases: ["btv", "تلفزيون"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "وضع صورتك الشخصية أو صورة من تمنشنه داخل إطار تلفاز 📺",

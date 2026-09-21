@@ -4,7 +4,7 @@ module.exports.config = {
   name: "معلومات",
   aliases: ["info", "admin", "سيرفر"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "عرض معلومات البوت والمطور الحقيقي",
@@ -26,34 +26,34 @@ module.exports.run = async function({ api, event, config }) {
     const timeStr = currentDate.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
 
     const response = `
-┌  ＮＯＢＡＲＡ • ＩＮＦＯ  ┐
+┌  ＭＩＫＯ • ＩＮＦＯ  ┐
 ┕━━━━━━━━━━━━━━━━━━━━┙
 
 ■ [ مـعـلـومـات الـمـطـور ]
-▸ الـمـطور : سـيـنـكـو (SINKO)
+▸ الـمـطور : مـاهـر (MAHER)
 ▸ الـعـمـر : ١٧ عـام
 ▸ الـدولـة : الـسـودان 🇸🇩
 ▸ الـتخصص : Node.js Developer
 
 ■ [ حـالـة الـنـظـام ]
-▸ اسـم الـبوت : ${config.botName || "نـوبـارا"}
+▸ اسـم الـبوت : ${config.botName || "مـيـكـو"}
 ▸ الـبـادئة : [ ${config.prefix} ]
 ▸ الـتـاريخ : ${dateStr}
 ▸ الـوقـت : ${timeStr}
 
 ■ [ الـتـواصـل ]
 ▸ فـيسبوك : https://www.facebook.com/profile.php?id=61588108307572
-▸ تـليجرام : @sinko_dev
+▸ الـبوت : مـيـكو الرسمي
 
 ┌━━━━━━━━━━━━━━━━━━━━┐
-┕  ＰＯＷＥＲＥＤ BY ＳＩＮＫＯ  ┙`.trim();
+┕  ＰＯＷＥＲＥＤ BY ＭＡＨＥＲ  ┙`.trim();
 
     api.sendMessage(response, threadID, () => {
       // تفاعل النجاح
       api.setMessageReaction("✅", messageID, () => {}, true);
     }, messageID);
 
-    console.log(chalk.cyan(`[Info] Info displayed by Sinko | Thread: ${threadID}`));
+    console.log(chalk.cyan(`[Info] Info displayed by Maher | Thread: ${threadID}`));
   } catch (error) {
     console.log(chalk.red(`[Info Failed] ${error.message}`));
     api.setMessageReaction("❌", messageID, () => {}, true);

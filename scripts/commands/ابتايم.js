@@ -5,7 +5,7 @@ module.exports.config = {
   name: "ابتايم",
   aliases: ["ابتايم", "up", "السيرفر"],
   version: "1.5",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "عرض إحصائيات السيرفر ووقت التشغيل في ريندر",
@@ -38,7 +38,7 @@ module.exports.run = async function({ api, event }) {
     const ping = Date.now() - event.timestamp;
 
     const response = `
-[ إحصائيات بوت نوبارا ]
+[ إحصائيات بوت ميكو ]
 
 • وقت التشغيل: ${days} يوم، ${hours} ساعة، ${minutes} دقيقة
 • سرعة الاستجابة: ${ping}ms
@@ -49,14 +49,14 @@ module.exports.run = async function({ api, event }) {
 • المعالج: ${cpuModel}
 • الحالة: متصل ونشط ⚡
 
-مطور النظام: سينكو
+مطور النظام: ماهر
     `.trim();
 
     api.sendMessage(response, threadID, () => {
       api.setMessageReaction("✅", messageID, () => {}, true);
     }, messageID);
 
-    console.log(chalk.green(`[Uptime] تم العرض بواسطة سينكو | ${days}d ${hours}h`));
+    console.log(chalk.green(`[Uptime] تم العرض بواسطة ماهر | ${days}d ${hours}h`));
 
   } catch (error) {
     console.log(chalk.red(`[Error] ${error.message}`));

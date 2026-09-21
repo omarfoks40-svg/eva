@@ -13,7 +13,7 @@ module.exports.config = {
   name: "لغز",
   aliases: ["puzzle", "أحجية"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "تحويل صورتك أو صورة من تمنشنه إلى قطع أحجية (Puzzle) 🧩",

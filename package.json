@@ -1,7 +1,7 @@
 {
-  "name": "nobara-sinko-bot",
+  "name": "miko-bot",
   "version": "1.0.0",
-  "description": "A robust Facebook Messenger bot for SINKO",
+  "description": "A robust Facebook Messenger bot for Maher",
   "main": "index.js",
   "type": "commonjs",
   "engines": {
@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "start:pm2": "pm2 start index.js --name nobara",
-    "stop:pm2": "pm2 stop nobara",
-    "logs": "pm2 logs nobara",
+    "start:pm2": "pm2 start index.js --name miko",
+    "stop:pm2": "pm2 stop miko",
+    "logs": "pm2 logs miko",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -51,6 +51,6 @@
     "yt-search": "^2.10.4",
     "ytdl-core": "^4.11.4"
   },
-  "author": "SINKO",
+  "author": "Maher",
   "license": "MIT"
   }

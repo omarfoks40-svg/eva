@@ -13,7 +13,7 @@ module.exports.config = {
   name: "سماء",
   aliases: ["sky", "مجرة"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "دمج صورتك أو صورة من تمنشنه مع منظر السماء النجمي 🌌",

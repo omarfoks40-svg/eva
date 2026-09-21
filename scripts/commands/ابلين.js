@@ -17,7 +17,7 @@ module.exports.config = {
   name: "ابلين",
   aliases: ["بوت"],
   version: "25.7.0",
-  author: "SINKO",
+  author: "ماهر",
   countDown: 1,
   adminOnly: false,
   description: "ذكاء اصطناعي سوداني",

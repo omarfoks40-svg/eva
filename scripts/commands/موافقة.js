@@ -6,7 +6,7 @@ module.exports.config = {
   name: "موافقة",
   aliases: ["approve", "approval"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "تشغيل أو إيقاف ميزة موافقة الأعضاء",

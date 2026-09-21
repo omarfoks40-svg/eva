@@ -39,7 +39,7 @@ module.exports = {
       }
 
       // تجهيز مسار الملف المؤقت
-      const fileName = `nobara_${crypto.randomBytes(4).toString('hex')}.mp4`;
+      const fileName = `miko_${crypto.randomBytes(4).toString('hex')}.mp4`;
       const filePath = path.join(__dirname, '..', '..', fileName);
       const writer = fs.createWriteStream(filePath);
 
@@ -64,11 +64,11 @@ module.exports = {
       if (stats.size > 85 * 1024 * 1024) {
         fs.unlinkSync(filePath);
         api.setMessageReaction("❌", messageID, () => {}, true);
-        return api.sendMessage(`┌  ＮＯＢＡＲＡ • ＳＩＺＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n⚠️ الحجم كبير جداً: ${fileSizeMB} MB`, threadID, messageID);
+          return api.sendMessage(`┌  ＭＩＫＯ • ＳＩＺＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n⚠️ الحجم كبير جداً: ${fileSizeMB} MB`, threadID, messageID);
       }
 
       const msg = {
-        body: `┌  ＮＯＢＡＲＡ • ＤＯＮＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n■ [ مـعـلـومـات الـفـيـديـو ]\n▸ العنوان: ${title}\n▸ الحجم: ${fileSizeMB} MB\n\n┌━━━━━━━━━━━━━━━┐\n┕  ＤＥＶ BY ＳＩＮＫＯ  ┙`,
+        body: `┌  ＭＩＫＯ • ＤＯＮＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n■ [ مـعـلـومـات الـفـيـديـو ]\n▸ العنوان: ${title}\n▸ الحجم: ${fileSizeMB} MB\n\n┌━━━━━━━━━━━━━━━┐\n┕  ＤＥＶ BY ＭＡＨＥＲ  ┙`,
         attachment: fs.createReadStream(filePath)
       };
 

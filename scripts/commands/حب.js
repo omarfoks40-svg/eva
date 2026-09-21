@@ -8,7 +8,7 @@ module.exports.config = {
   name: "حب",
   aliases: ["love", "رومانسية"],
   version: "1.3",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "صنع صورة رومانسية تجمعك مع شخص تمنشنه 💖",

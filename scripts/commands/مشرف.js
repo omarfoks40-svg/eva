@@ -7,7 +7,7 @@ module.exports.config = {
   name: "مشرف",
   aliases: ["vip", "المميزين"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false, 
   description: "إدارة قائمة الأعضاء المميزين (إضافة، حذف، عرض)",

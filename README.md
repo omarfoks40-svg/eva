@@ -1,12 +1,12 @@
-# 🌹 نوبارا | Nobara Messenger Bot
+# 🌹 ميكو | Miko Messenger Bot
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Developer-SINKO-red?style=for-the-badge&logo=github">
-  <img src="https://img.shields.io/badge/Bot_Name-Nobara-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Developer-Maher-red?style=for-the-badge&logo=github">
+  <img src="https://img.shields.io/badge/Bot_Name-Miko-blue?style=for-the-badge">
   <img src="https://img.shields.io/badge/Library-ws3--fca-green?style=for-the-badge">
 </p>
 
-روبوت فيسبوك ماسنجر احترافي، تم تطويره بواسطة المطور **سينكو (SINKO)**. يعتمد البوت على مكتبة `ws3-fca` القوية، ويقدم تجربة متكاملة تشمل الذكاء الاصطناعي، أدوات الوسائط، ولوحة تحكم ويب متطورة.
+روبوت فيسبوك ماسنجر احترافي، تم تطويره بواسطة المطور **ماهر (Maher)**. يعتمد البوت على مكتبة `ws3-fca` القوية، ويقدم تجربة متكاملة تشمل الذكاء الاصطناعي، أدوات الوسائط، ولوحة تحكم ويب متطورة.
 
 ## 📋 جدول المحتويات
 * [المميزات](#-المميزات)
@@ -32,8 +32,8 @@
 ## 🚀 التثبيت
 ```bash
 # استنساخ المستودع
-git clone [https://github.com/SINKO-DEV/Nobara-Bot.git](https://github.com/SINKO-DEV/Nobara-Bot.git)
-cd Nobara-Bot
+git clone [https://github.com/omarfoks40-svg/eva.git](https://github.com/omarfoks40-svg/eva.git)
+cd eva
 
 # تثبيت التبعيات
 npm install

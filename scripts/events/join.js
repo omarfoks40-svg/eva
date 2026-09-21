@@ -39,7 +39,7 @@ module.exports = {
       // --- حالة الإضافة الجماعية (أكثر من مستخدمين) ---
       if (addedUsers.length > 2) {
         let names = addedUsers.map(u => u.fullName).join(" ، ");
-        let msg = `┌  ＮＯＢＡＲＡ • ＷＥＬＣＯＭＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n🎉 أهلاً بكم جميعاً في [ ${groupName} ]\n\n■ [ الأعضاء الجدد ]\n▸ ${names}\n\nنورتوا المكان يا شباب، نتمنى لكم تفاعل جميل!\n\n┕  ⏳  ┙`;
+         let msg = `┌  ＭＩＫＯ • ＷＥＬＣＯＭＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n🎉 أهلاً بكم جميعاً في [ ${groupName} ]\n\n■ [ الأعضاء الجدد ]\n▸ ${names}\n\nنورتوا المكان يا شباب، نتمنى لكم تفاعل جميل!\n\n┕  ⏳  ┙`;
         return api.sendMessage(msg, threadID);
       }
 
@@ -69,7 +69,7 @@ module.exports = {
         });
 
         const msg = {
-          body: `┌  ＮＯＢＡＲＡ • ＷＥＬＣＯＭＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n🎉 أنرت المجموعة يا [ ${userName} ]\n🏠 في: ${groupName}\n\n『 ${randomQuote} 』\n\n┕  ＤＥＶ BY ＳＩＮＫＯ  ┙`,
+          body: `┌  ＭＩＫＯ • ＷＥＬＣＯＭＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n🎉 أنرت المجموعة يا [ ${userName} ]\n🏠 في: ${groupName}\n\n『 ${randomQuote} 』\n\n┕  ＤＥＶ BY ＭＡＨＥＲ  ┙`,
           attachment: fs.createReadStream(filePath)
         };
 

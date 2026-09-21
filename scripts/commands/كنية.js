@@ -21,7 +21,7 @@ module.exports.config = {
   name: "كنية",
   aliases: ["nickname", "رتب", "rank"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: true,
   description: "تغيير كنية جميع الأعضاء كل 5 ثواني",

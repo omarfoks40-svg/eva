@@ -8,7 +8,7 @@ module.exports.config = {
   name: "قبلة",
   aliases: ["kiss", "بوسة"],
   version: "1.1",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "صنع صورة رومانسية بين شخصين 💋",

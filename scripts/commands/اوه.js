@@ -6,7 +6,7 @@ module.exports.config = {
   name: "اوه",
   aliases: ["omg", "اندهش"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "تشغيل فيديو رد الفعل (OMG)",
@@ -39,7 +39,7 @@ module.exports.run = async function({ api, event }) {
       api.setMessageReaction("✅", messageID, () => {}, true);
     }, messageID);
 
-    console.log(chalk.cyan(`[فيديو] تم إرسال فيديو OMG بواسطة سينكو في المجموعة: ${threadID}`));
+    console.log(chalk.cyan(`[فيديو] تم إرسال فيديو OMG بواسطة ماهر في المجموعة: ${threadID}`));
   } catch (error) {
     api.setMessageReaction("❌", messageID, () => {}, true);
     api.sendMessage("⚠️ فشل تشغيل الفيديو، تأكد من وجوده في المسار الصحيح.", threadID, messageID);

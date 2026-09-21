@@ -4,7 +4,7 @@ module.exports.config = {
   name: "نشر",
   aliases: ["noti", "تعميم"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 10,
   adminOnly: true, // للمطور فقط
   description: "إرسال إشعار عام لكل المجموعات المشترك بها البوت",
@@ -44,7 +44,7 @@ module.exports.run = async function({ api, event, args }) {
     const notificationDate = moment().format("YYYY-MM-DD");
 
     const notificationMessage = `
-┌  ＮＯＢＡＲＡ • ＮＯＴＩＦＹ  ┐
+┌  ＭＩＫＯ • ＮＯＴＩＦＹ  ┐
 ┕━━━━━━━━━━━━━━━━━━━━┙
 
 ■ [ رسـالـة مـن الـمـطـور ]
@@ -53,7 +53,7 @@ module.exports.run = async function({ api, event, args }) {
 ■ [ تـفـاصـيـل ]
 ▸ الـوقـت : ${notificationTime}
 ▸ الـتـاريخ : ${notificationDate}
-▸ الـمـصدر : سـيـنـكـو (SINKO)
+▸ الـمـصدر : مـاهـر (MAHER)
 
 ┕━━━━━━━━━━━━━━━━━━━━┙`.trim();
 

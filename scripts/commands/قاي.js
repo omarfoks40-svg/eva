@@ -10,7 +10,7 @@ module.exports.config = {
   name: "قاي",
   aliases: ["gay", "قاي"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "وضع علم المثليين على صورة شخص تمنشنه 🌈",

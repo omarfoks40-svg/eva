@@ -2,7 +2,7 @@ module.exports.config = {
   name: "ايدي",
   aliases: ["uid", "id"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "عرض معرف الحساب ورابط البروفايل",

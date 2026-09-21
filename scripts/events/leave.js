@@ -72,7 +72,7 @@ module.exports = {
       if (stats.size === 0) throw new Error("الصورة فارغة");
 
       const msg = {
-        body: `┌  ＮＯＢＡＲＡ • ＬＥＡＶＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n👋 للأسف، غادر [ ${userName} ] المجموعة.\n\n『 ${randomQuote} 』\n\n┕  ＤＥＶ BY ＳＩＮＫＯ  ┙`,
+        body: `┌  ＭＩＫＯ • ＬＥＡＶＥ  ┐\n┕━━━━━━━━━━━━━━━┙\n\n👋 للأسف، غادر [ ${userName} ] المجموعة.\n\n『 ${randomQuote} 』\n\n┕  ＤＥＶ BY ＭＡＨＥＲ  ┙`,
         attachment: fs.createReadStream(filePath)
       };
 

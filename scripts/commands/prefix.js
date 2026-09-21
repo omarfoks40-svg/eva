@@ -4,7 +4,7 @@ module.exports.config = {
   name: "بادئة",
   aliases: ["prefix", "البادئة"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "عرض بادئة النظام وبادئة المجموعة الحالية",
@@ -29,7 +29,7 @@ module.exports.run = async function({ api, event, config, threadsData }) {
     const globalPrefix = config.prefix;
 
     const replyMsg = `
-┌  ＮＯＢＡＲＡ • ＰＲＥＦＩＸ  ┐
+┌  ＭＩＫＯ • ＰＲＥＦＩＸ  ┐
 ┕━━━━━━━━━━━━━━━━━━━━┙
 
 ■ [ الـبـادئـة الـحـالـيـة ]
@@ -40,7 +40,7 @@ module.exports.run = async function({ api, event, config, threadsData }) {
 اكتب [ ${threadPrefix}الاوامر ] لعرض كل المهام.
 
 ┌━━━━━━━━━━━━━━━━━━━━┐
-┕  ＰＯＷＥＲＥＤ BY ＳＩＮＫＯ  ┙`.trim();
+┕  ＰＯＷＥＲＥＤ BY ＭＡＨＥＲ  ┙`.trim();
 
     api.sendMessage(replyMsg, threadID, () => {
       // تفاعل صح عند النجاح

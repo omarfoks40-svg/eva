@@ -8,7 +8,7 @@ module.exports.config = {
   name: "ازرق",
   aliases: ["blue", "صور_في_اي_بي"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false, 
   description: "إرسال صور من مكتبة بلو (للمطورين والـ VIP فقط)",

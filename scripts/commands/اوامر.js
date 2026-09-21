@@ -3,7 +3,7 @@ module.exports = {
     name: "help",
     aliases: ["الاوامر", "أوامر", "اوامر", "المساعدة"],
     version: "1.5.0",
-    author: "Nobara Developer",
+    author: "ماهر",
     countDown: 5,
     role: 0,
     usePrefix: true,
@@ -61,18 +61,26 @@ module.exports = {
       return api.sendMessage(msg, threadID, messageID);
     }
 
-    // عرض كل الأوامر
-    let list = [];
+    let msg = `╮━═━═━═━═━━╭
 
-    allCommands.forEach(cmd => {
-      list.push(`• ${cmd.config.name}`);
-    });
+  ❖ قائمة الأوامر ❖
 
-    let msg = `═════════ HELP ═════════\n\n`;
-    msg += `📊 عدد الأوامر: ${allCommands.size}\n`;
-    msg += `⚡ البادئة: ${prefix}\n\n`;
-    msg += `📜 الأوامر:\n${list.join("\n")}\n\n`;
-    msg += `💡 اكتب: ${prefix}help [اسم الأمر]`;
+╯━═━═━═━═━━╰
+المطور : ماهر 🫆
+━━━✦━━━➥
+ذكاء : AI 🧠
+━━━✦━━━➥
+   موسيقى : 🎶
+━━━✦━━━➥
+صورة : 🖼️
+━━━✦━━━➥
+العاب :  🎮
+━━━✦━━━➥
+
+
+══• •✠•❀•✠• •════
+MIKO AI عدد اوامر البوت: ${allCommands.size}
+‌══• •✠•❀•✠• •════`;
 
     api.sendMessage(msg, threadID, messageID);
   }

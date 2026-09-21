@@ -11,7 +11,7 @@ module.exports.config = {
   name: "تحديث",
   aliases: ["update", "ترقية"],
   version: "1.1",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 10,
   adminOnly: true,
   description: "التحقق من وجود تحديثات للبوت من مستودع GitHub",

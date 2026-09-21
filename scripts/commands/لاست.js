@@ -4,7 +4,7 @@ module.exports.config = {
   name: "لاست",
   aliases: ["list", "groups"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "عرض قائمة المجموعات والخروج منها",

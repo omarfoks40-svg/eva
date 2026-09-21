@@ -7,7 +7,7 @@ module.exports.config = {
   name: "ويسو",
   aliases: ["ai", "ذكاء"],
   version: "1.3",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 2,
   adminOnly: false,
   description: "ذكاء اصطناعي سريع جداً",

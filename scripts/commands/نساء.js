@@ -6,7 +6,7 @@ module.exports.config = {
   name: "نساء",
   aliases: ["women", "☕"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "تشغيل فيديو Women الشهير ☕",
@@ -40,7 +40,7 @@ module.exports.run = async function({ api, event }) {
       api.setMessageReaction("☕", messageID, () => {}, true);
     }, messageID);
 
-    console.log(chalk.cyan(`[فيديو] تم تشغيل فيديو Women بواسطة سينكو | المجموعة: ${threadID}`));
+    console.log(chalk.cyan(`[فيديو] تم تشغيل فيديو Women بواسطة ماهر | المجموعة: ${threadID}`));
   } catch (error) {
     api.setMessageReaction("❌", messageID, () => {}, true);
     api.sendMessage("⚠️ فشل تشغيل الفيديو، تأكد من وجود الملف في المسار الصحيح.", threadID, messageID);

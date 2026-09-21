@@ -6,7 +6,7 @@ module.exports.config = {
   name: "شك",
   aliases: ["sus", "مريب"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "تشغيل صوت الشك المريب (SUS) 🤨",
@@ -40,7 +40,7 @@ module.exports.run = async function({ api, event }) {
       api.setMessageReaction("🦧", messageID, () => {}, true);
     }, messageID);
 
-    console.log(chalk.cyan(`[صوت] تم تشغيل صوت SUS بواسطة سينكو | المجموعة: ${threadID}`));
+    console.log(chalk.cyan(`[صوت] تم تشغيل صوت SUS بواسطة ماهر | المجموعة: ${threadID}`));
   } catch (error) {
     api.setMessageReaction("❌", messageID, () => {}, true);
     api.sendMessage("⚠️ فشل تشغيل الصوت، تأكد من وجوده في المسار الصحيح.", threadID, messageID);

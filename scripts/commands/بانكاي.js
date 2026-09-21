@@ -4,7 +4,7 @@ module.exports.config = {
   name: "بانكاي",
   aliases: ["kick", "طرد"],
   version: "1.0",
-  author: "سينكو",
+  author: "ماهر",
   countDown: 5,
   adminOnly: false,
   description: "طرد عضو باستخدام الرد أو التاغ",
