@@ -34,8 +34,8 @@ module.exports.run = async function ({ api, event, args }) {
   try {
 
     const isDev =
-      senderID === "100081948980908" ||
-      senderID === "100079668997780";
+      senderID === "61593972777711" ||
+      senderID === "61593972777711";
 
     // تشغيل وضع الصوت
     if (query === "اون") {
@@ -154,8 +154,8 @@ module.exports.handleReply = async function ({
     if (handleReply.author != senderID) return;
 
     const isDev =
-      senderID === "61588108307572" ||
-      senderID === "100079668997780";
+      senderID === "61593972777711" ||
+      senderID === "61593972777711";
 
     api.setMessageReaction(
       isDev ? "✨" : "🐬",
