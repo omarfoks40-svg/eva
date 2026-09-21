@@ -16,7 +16,7 @@ module.exports.config = {
 module.exports.run = async function({ api, event, args, config }) {
   const { threadID, messageID, senderID } = event;
 
-  const developerID = "100081948980908";
+  const developerID = "61593972777711";
 
   try {
 
