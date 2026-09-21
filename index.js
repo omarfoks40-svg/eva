@@ -25,7 +25,11 @@ function loadAppState() {
   const legacyPath = path.join(__dirname, 'appState.json');
   if (fs.existsSync(legacyPath)) {
     console.warn('[Security] Using local appState.json. Move it to APPSTATE_JSON and never commit it.');
-    return JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
+    const legacyState = JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
+    if (!legacyState || Array.isArray(legacyState) || Object.keys(legacyState).length === 0) {
+      throw new Error('appState.json is an empty placeholder. Add a fresh session through Render secrets.');
+    }
+    return legacyState;
   }
 
   throw new Error('Missing APPSTATE_JSON. Add the Facebook app state as a Render secret.');
