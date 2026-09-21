@@ -10,7 +10,7 @@ const CONFIG_PATH = path.join(__dirname, 'config.json');
 const globalConfig = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
 function loadAppState() {
-  const raw = process.env.APPSTATE_JSON || (process.env.APPSTATE_JSON_BASE64
+  const raw = process.env.APPSTATE_JSON || process.env.APPSTATE || (process.env.APPSTATE_JSON_BASE64
     ? Buffer.from(process.env.APPSTATE_JSON_BASE64, 'base64').toString('utf8')
     : '');
 
@@ -31,7 +31,12 @@ function loadAppState() {
   throw new Error('Missing APPSTATE_JSON. Add the Facebook app state as a Render secret.');
 }
 
-const appState = loadAppState();
+let appState = null;
+try {
+  appState = loadAppState();
+} catch (error) {
+  console.error('[Startup] Facebook session is missing or invalid:', error.message);
+}
 
 const app = express();
 app.use(express.json({ limit: '1mb' }));
@@ -71,8 +76,8 @@ if (fs.existsSync(eventsDir)) {
 }
 
 // --- تشغيل البوت ---
-fca({ appState }, (err, api) => {
-  if (err) return console.error(chalk.red('🔥 Login Failed! Check AppState.'));
+if (appState) fca({ appState }, (err, api) => {
+  if (err) return console.error(chalk.red('🔥 Login Failed! Check APPSTATE_JSON/APPSTATE and Facebook session validity.'), err.message || err);
 
   console.log(chalk.cyan(`🌟 ${globalConfig.botName} جاهز للعمل على ريندر! 🌟`));
 
@@ -161,4 +166,5 @@ fca({ appState }, (err, api) => {
       }
     }
   });
-});
+}});
+else console.error('[Startup] Miko web server is online, but the Facebook bot is paused until APPSTATE_JSON or APPSTATE is configured.');
