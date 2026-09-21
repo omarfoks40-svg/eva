@@ -3,6 +3,7 @@ const path = require('path');
 const chalk = require('chalk');
 const fca = require('ws3-fca');
 const express = require('express');
+const mikoAPI = require('./services/miko-api');
 
 // --- تحميل الإعدادات ---
 const CONFIG_PATH = path.join(__dirname, 'config.json');
@@ -33,6 +34,8 @@ function loadAppState() {
 const appState = loadAppState();
 
 const app = express();
+app.use(express.json({ limit: '1mb' }));
+mikoAPI.mount(app);
 const PORT = process.env.PORT || 28140;
 
 // سيرفر الاستمرارية (ضروري جداً لريندر عشان ما يطفي)
